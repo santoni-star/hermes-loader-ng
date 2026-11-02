@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Hermes" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/terminal_bg</item>
+        <item name="android:colorBackground">@color/terminal_bg</item>
+        <item name="android:statusBarColor">@color/terminal_bg</item>
+        <item name="android:navigationBarColor">@color/terminal_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/terminal_fg</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ToolbarButton" parent="@android:style/Widget.Material.Button.Borderless.Small">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <!-- Filled: the one action a user needs most of the time. -->
+    <style name="PrimaryButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/btn_primary</item>
+        <item name="android:textColor">#FF0C2420</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <!-- Destructive: only ever one of these, always red. -->
+    <style name="DangerButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/btn_danger</item>
+        <item name="android:textColor">#FFFFB4B4</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <!-- A plain button inside dialogs (settings, maintenance). -->
+    <style name="PanelButton" parent="@android:style/Widget.Material.Button.Borderless.Small">
+        <item name="android:textColor">@color/terminal_fg</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="KeyButton" parent="@android:style/Widget.Material.Button.Borderless.Small">
+        <item name="android:textColor">@color/key_fg</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:minHeight">32dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:background">@drawable/key_bg</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+</resources>

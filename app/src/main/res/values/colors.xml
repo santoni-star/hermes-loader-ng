@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="terminal_bg">#FF0C1015</color>
+    <color name="terminal_fg">#FFDFE9E8</color>
+    <color name="accent">#FF7BE0C3</color>
+    <color name="key_fg">#FFB9C9C9</color>
+    <color name="panel_bg">#FF151D24</color>
+    <color name="divider">#FF26343B</color>
+</resources>

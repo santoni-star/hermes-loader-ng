@@ -1,0 +1,22 @@
+# Normalise line endings in the repository; keep binaries untouched.
+* text=auto
+.gitattributes text eol=lf
+
+*.sh      text eol=lf
+gradlew   text eol=lf
+*.bat     text eol=crlf
+*.ps1     text eol=crlf
+*.kts     text eol=lf
+*.java    text eol=lf
+*.xml     text eol=lf
+*.md      text eol=lf
+*.txt     text eol=lf
+*.json    text eol=lf
+*.patch   text eol=lf
+
+*.apk     binary
+*.so      binary
+*.ttf     binary
+*.woff2   binary
+*.png     binary
+*.jar     binary

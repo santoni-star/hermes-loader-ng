@@ -1,0 +1,20 @@
+Hermes dashboard web UI (SPA)
+
+Source: https://github.com/NousResearch/hermes-agent
+Built from tag v0.22.5 with:
+    npm install --workspace web
+    npx vite build            (web/vite.config.ts -> hermes_cli/web_dist)
+
+The bundle is redistributed under the Hermes Agent MIT license, with two
+local changes for this Android app (sources in dashboard-patch/ at the
+repository root):
+
+  1. web/src/pages/ChatPage.tsx - forward Android WebView soft-keyboard
+     commits to the terminal (xtermjs/xterm.js#6259) instead of letting
+     xterm's racy hidden-textarea diff drop them.
+  2. web/src/index.css - keep xterm's helper textarea 1x1 in the viewport
+     while idle so Android WebView raises the soft keyboard.
+
+Everything else is the upstream v0.22.5 build. The bundled webfonts
+(Collapse, Mondwest, Rules, JetBrains Mono) remain under their respective
+upstream licenses. See NOTICE.md in the project root.

@@ -1,0 +1,43 @@
+# Gradle / build output
+.gradle/
+build/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Local SDK location — machine specific
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+
+# Toolchain downloaded by build.ps1 (kept outside VCS). The bundle builder in
+# tools/ is source and must stay tracked, so ignore only the downloaded parts.
+tools/sdk/
+tools/gradle-*/
+tools/*.zip
+
+# Latest-build pointer (archived copies live in releases/)
+/app-debug-web.apk
+
+# Keystores / signing material
+*.jks
+*.keystore
+keystore.properties
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Bundle build output
+out/bundles/

@@ -1,0 +1,4 @@
+# SHA-256 of every archived APK (sha256sum -c compatible)
+851df65787d85b67fae0988d3affe5a42e3bec77472cd54438d3630b65e4be06  hermes-loader-2.0.0-ng-vc100-debug-b2.apk
+6f4ba2b85a95463875ecf5bb4c9b1a101a1cf72d98b2a42e0ba231f336671620  hermes-loader-2.0.0-ng-vc100-debug-b3.apk
+32917e97a8bf766d73192e3478f6a594456f186d01ea3ee2b068feff5a9a26cd  hermes-loader-2.0.0-ng-vc100-debug.apk

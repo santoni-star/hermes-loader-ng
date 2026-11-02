@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hermes Loader</string>
+
+    <string name="btn_start">START</string>
+    <string name="action_start_agent">START AGENT</string>
+    <string name="btn_web">WEB</string>
+    <string name="btn_term">TERM</string>
+    <string name="btn_shell">SHELL</string>
+    <string name="btn_setup">SETUP</string>
+    <string name="btn_log">LOG</string>
+    <string name="btn_stop">STOP</string>
+    <string name="btn_menu">MENU</string>
+    <string name="hint_input">Type a command or message…</string>
+    <string name="action_send">Send</string>
+
+    <string name="web_starting">Starting the Hermes dashboard…\n\nFirst start after an install can take a while:\nthe server imports FastAPI inside PRoot.</string>
+    <string name="web_loading">Loading the dashboard…</string>
+    <string name="web_failed">The dashboard did not start.\n\nTap to retry; LOG shows what it printed.</string>
+    <string name="web_unreachable">The dashboard stopped responding.\n\nReconnecting…</string>
+
+    <string name="log_title">Dashboard log</string>
+    <string name="log_body">webaux.log — %1$s\n\n%2$s</string>
+    <string name="log_copy">Copy</string>
+    <string name="log_close">Close</string>
+    <string name="log_empty">Nothing here yet: the dashboard has not been started in this version of the app.</string>
+    <string name="log_unreadable">Could not read the dashboard log:</string>
+
+    <string name="channel_name">Hermes agent</string>
+    <string name="channel_description">Background process notification</string>
+    <string name="notif_title">Hermes agent is running</string>
+    <string name="notif_text">Tap to open Hermes</string>
+    <string name="notif_stop">Stop</string>
+
+    <string name="menu_title">Loader settings</string>
+    <string name="menu_repo">Hermes repository</string>
+    <string name="menu_profile">Install profile (core / all)</string>
+    <string name="menu_pty">Emulate a real terminal (PTY)</string>
+    <string name="menu_clear">Clear terminal</string>
+    <string name="menu_copy">Copy all output</string>
+    <string name="menu_reinstall_rootfs">Reinstall Linux rootfs (keeps storage/)</string>
+    <string name="menu_reset">Wipe everything (incl. storage/)</string>
+    <string name="menu_battery">Disable battery optimization</string>
+    <string name="menu_about">About</string>
+
+    <string name="confirm_reinstall">The Linux rootfs will be downloaded and extracted again.
+
+Your settings, history, skills and keys in storage/ are NOT touched.
+
+Continue?</string>
+    <string name="confirm_reset">This deletes the Linux rootfs, the agent checkout AND storage/
+(configs, history, skills, API keys, database).
+
+This cannot be undone. Continue?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="err_not_arm">This device ABI (%1$s) is not supported. Only arm64-v8a, armeabi-v7a and x86_64 are bundled.</string>
+
+    <string name="exit_setup_title">Hermes is not configured yet</string>
+    <string name="exit_setup_message">The guest exited with code %1$d.
+
+No provider is configured yet. Sign in with Nous Portal (device code; the free tier works when your account has one), or run hermes setup to pick a provider and paste an API key.</string>
+    <string name="exit_setup_signin">Sign in to Nous</string>
+    <string name="exit_setup_run">Run setup</string>
+    <string name="exit_setup_later">Later</string>
+
+    <string name="keys_hide">Hide the header and the extra keys</string>
+    <string name="keys_show">Show the header and the extra keys</string>
+    <string name="keys_keyboard">Show or hide the soft keyboard</string>
+    <string name="keys_backspace">Backspace: delete the last character, or send Backspace to the shell</string>
+    <string name="keys_hidden">header and keys hidden — tap ≡ to bring them back</string>
+
+</resources>
