@@ -1733,8 +1733,9 @@ public class MainActivity extends Activity
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(logTitleWithRam())
                 .setView(scroll)
-                .setPositiveButton(R.string.log_copy, null)
-                .setNegativeButton(R.string.log_close, null)
+                .setPositiveButton(R.string.log_close, null)
+                .setNeutralButton(R.string.log_copy, null)
+                .setNegativeButton(R.string.log_clear, null)
                 .create();
         final Runnable[] refreshRamTitle = new Runnable[1];
         refreshRamTitle[0] = () -> {
@@ -1744,15 +1745,33 @@ public class MainActivity extends Activity
         };
         dialog.setOnDismissListener(d -> ui.removeCallbacks(refreshRamTitle[0]));
         // Copying must not close the dialog: the user may want to read on.
-        dialog.setOnShowListener(d -> dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setOnClickListener(v -> {
-                    ClipboardManager cm =
-                            (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    if (cm != null) {
-                        cm.setPrimaryClip(ClipData.newPlainText("Hermes dashboard log", text));
-                        toast("Log copied.");
-                    }
-                }));
+        dialog.setOnShowListener(d -> {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setOnClickListener(v -> dialog.dismiss());
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
+                    .setOnClickListener(v -> {
+                        ClipboardManager cm =
+                                (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        if (cm != null) {
+                            cm.setPrimaryClip(ClipData.newPlainText("Hermes dashboard log", text));
+                            toast("Log copied.");
+                        }
+                    });
+            // Clearing truncates webaux.log and refreshes the view.
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    .setOnClickListener(v -> {
+                        try (java.io.FileWriter fw = new java.io.FileWriter(new java.io.File(path))) {
+                            fw.write("");
+                        } catch (Exception e) {
+                            toast("Could not clear log: " + describe(e));
+                            return;
+                        }
+                        ui.post(() -> {
+                            view.setText(getString(R.string.log_body, path, ""));
+                            toast("Log cleared.");
+                        });
+                    });
+        });
         dialog.show();
         ui.postDelayed(refreshRamTitle[0], 5_000);
     }

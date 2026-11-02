@@ -16,7 +16,7 @@ android {
         applicationId = "com.hermes.loader"
         minSdk = 24
         targetSdk = 34
-        versionCode = 109
+        versionCode = 110
         versionName = "2.0.0-ng"
         resourceConfigurations += listOf("en", "uk")
     }

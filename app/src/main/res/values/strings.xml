@@ -23,6 +23,7 @@
     <string name="log_title">Dashboard log</string>
     <string name="log_body">webaux.log — %1$s\n\n%2$s</string>
     <string name="log_copy">Copy</string>
+    <string name="log_clear">Clear log</string>
     <string name="log_close">Close</string>
     <string name="log_empty">Nothing here yet: the dashboard has not been started in this version of the app.</string>
     <string name="log_unreadable">Could not read the dashboard log:</string>

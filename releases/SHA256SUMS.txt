@@ -7,4 +7,6 @@
 f78f09885153d0ed186ab49675008e38befe9b99af9476a0588f6f3d2bb97b00  hermes-loader-2.0.0-ng-vc106-debug.apk
 f002b63815651f45aacbdfea6029dfe93d79ba9dae768e447db9ea4d86079705  hermes-loader-2.0.0-ng-vc107-debug.apk
 4e61bc89181f00d9a24d267b5a12e312b296b3635e82d6613d8db2d7784ff84a  hermes-loader-2.0.0-ng-vc108-debug.apk
+e516ac588b12f24b30e167ffcdf9a0472671e8fc639cc0443b23d6a65846773f  hermes-loader-2.0.0-ng-vc109-debug-b2.apk
 f2a625a39d1ea298597b0f27160e7141bf80bb4f3477127782e329714764fe89  hermes-loader-2.0.0-ng-vc109-debug.apk
+428bfbb045ae5e80f6d99c182d53057f0b313e1c885ef27caf108312c0e2549b  hermes-loader-2.0.0-ng-vc110-debug.apk
