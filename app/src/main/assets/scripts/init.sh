@@ -20,6 +20,21 @@ MODE="${1:-boot}"
 export HERMES_HOME="${HERMES_HOME:-/home/hermes/.hermes}"
 export PATH="/opt/hermes/.venv/bin:/opt/hermes/bin:/home/hermes/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
+# The first Trixie images installed by this loader did not include libatomic1.
+# Hermes' downloaded arm64 Node runtime needs libatomic.so.1 to serve the
+# dashboard chat PTY WebSocket; without it the UI reconnects indefinitely.
+# Keep the repair exceptional: all new installs get the package in setup.sh,
+# so their normal and fast starts only perform the cheap file test.
+ensure_node_atomic() {
+    [ -e /usr/lib/aarch64-linux-gnu/libatomic.so.1 ] && return 0
+    say PKG "Installing missing libatomic1 for dashboard chat…"
+    if ! apt-get update || ! apt-get install -y --no-install-recommends libatomic1; then
+        warn PKG "Could not install libatomic1; WEB chat needs a network connection once."
+        return 1
+    fi
+    return 0
+}
+
 # Fast modes skip the heavy bootstrap (banner, ensure_storage, prepare_guest)
 # and go straight to run.sh. They assume the agent is already installed.
 case "$MODE" in
@@ -29,6 +44,7 @@ case "$MODE" in
         # The PTY that `script(1)` allocates starts at 0x0 because its own
         # stdin is a pipe; without this the TUI renders an empty screen.
         stty_size
+        ensure_node_atomic || true
         stop_stale_dashboard
         exec /opt/loader/run.sh
         ;;
@@ -45,8 +61,14 @@ stty_size
 # A previous dashboard may still own the port (see stop_stale_dashboard). An
 # auxiliary dashboard shares the console's gateway, so it must not sweep it.
 case "$MODE" in
-    boot|web) stop_stale_dashboard ;;
-    webaux|webaux-ready) stop_stale_dashboard keep-gateway ;;
+    boot|web)
+        ensure_node_atomic || true
+        stop_stale_dashboard
+        ;;
+    webaux|webaux-ready)
+        ensure_node_atomic || true
+        stop_stale_dashboard keep-gateway
+        ;;
 esac
 now_ms
 T2="$NOW"

@@ -94,6 +94,7 @@ public class MainActivity extends Activity
     private LinearLayout headerBox;
     private LinearLayout extraKeys;
     private LinearLayout extraKeysCompact;
+    private LinearLayout webExtraKeysCompact;
     private View webExtraKeys;
     private Button ctrlKey;
     private Button altKey;
@@ -693,6 +694,29 @@ public class MainActivity extends Activity
     }
 
     /**
+     * Compact bar for WEB mode: what stays when the user collapses the keys panel.
+     * A single ≡ button brings the header and the keys back.
+     */
+    private LinearLayout buildWebExtraKeysCompact() {
+        LinearLayout box = new LinearLayout(this);
+        box.setOrientation(LinearLayout.HORIZONTAL);
+        box.setGravity(Gravity.CENTER_VERTICAL);
+        box.setPadding(dp(4), dp(4), dp(10), dp(4));
+        Button expand = extraKey("\u2261");
+        expand.setContentDescription(getString(R.string.keys_show));
+        expand.setOnClickListener(v -> toggleExtraKeysBar());
+        box.addView(expand, new LinearLayout.LayoutParams(dp(52), dp(34)));
+        TextView hint = new TextView(this);
+        hint.setText(R.string.keys_hidden);
+        hint.setTextColor(0xFF819398);
+        hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+        hint.setPadding(dp(10), 0, 0, 0);
+        box.addView(hint, new LinearLayout.LayoutParams(
+                0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        return box;
+    }
+
+    /**
      * Sends a key sequence to the dashboard's terminal.
      *
      * <p>The SPA owns the xterm.js instance, so there is no Java-side handle to
@@ -813,11 +837,11 @@ public class MainActivity extends Activity
 
     private void refreshExtraKeys() {
         boolean expanded = prefs.extraKeys();
-        // The dashboard pane has its own chrome and no way out of the app once
-        // the header is gone, so WEB mode always keeps the header visible.
-        boolean web = webPane != null && webPane.getVisibility() == View.VISIBLE;
         if (headerBox != null) {
-            headerBox.setVisibility(expanded || web ? View.VISIBLE : View.GONE);
+            // Collapsing the keys bar hides the header in every mode, including WEB,
+            // so the ≡ button is the only way back. Keeping the header visible when
+            // collapsed would leave a dead stripe with no escape.
+            headerBox.setVisibility(expanded ? View.VISIBLE : View.GONE);
         }
         if (extraKeys != null) {
             extraKeys.setVisibility(expanded ? View.VISIBLE : View.GONE);
@@ -827,6 +851,9 @@ public class MainActivity extends Activity
         }
         if (webExtraKeys != null) {
             webExtraKeys.setVisibility(expanded ? View.VISIBLE : View.GONE);
+        }
+        if (webExtraKeysCompact != null) {
+            webExtraKeysCompact.setVisibility(expanded ? View.GONE : View.VISIBLE);
         }
         if (!expanded) clearModifiers();
     }
@@ -929,6 +956,11 @@ public class MainActivity extends Activity
         // Extra keys panel for WebView (injected via JS interface)
         webExtraKeys = buildWebExtraKeys();
         webPane.addView(webExtraKeys, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
+                Gravity.BOTTOM));
+        // Compact bar shown when the keys panel is collapsed.
+        webExtraKeysCompact = buildWebExtraKeysCompact();
+        webPane.addView(webExtraKeysCompact, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
                 Gravity.BOTTOM));
 

@@ -23,12 +23,15 @@ if ! apt-get update; then
     die "apt-get update failed. Check that the device has working DNS/network."
 fi
 
+# Hermes' downloaded arm64 Node runtime links libatomic.so.1. Debian's minimal
+# Trixie image does not include it, which otherwise makes the dashboard chat
+# WebSocket immediately disconnect and reconnect forever.
 say PKG "Installing Git, Python, Node.js, curl and friends…"
 if ! apt-get install "${APT_OPTS[@]}" \
     ca-certificates curl git openssh-client xz-utils procps util-linux \
     less nano ripgrep tzdata locales \
     python3 python3-venv python3-pip \
-    nodejs npm; then
+    libatomic1 nodejs npm; then
     die "Could not install the base packages."
 fi
 ok PKG "Base packages installed."

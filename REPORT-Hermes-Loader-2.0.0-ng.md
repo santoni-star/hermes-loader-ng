@@ -1,8 +1,8 @@
 # Hermes Loader 2.0.0-ng — validation report
 
-**Build:** version code 106 (`2.0.0-ng`)  
-**APK:** `releases/hermes-loader-2.0.0-ng-vc106-debug.apk`  
-**SHA-256:** `f78f09885153d0ed186ab49675008e38befe9b99af9476a0588f6f3d2bb97b00`
+**Build:** version code 109 (`2.0.0-ng`)  
+**APK:** `releases/hermes-loader-2.0.0-ng-vc109-debug.apk`  
+**SHA-256:** `f2a625a39d1ea298597b0f27160e7141bf80bb4f3477127782e329714764fe89`
 
 ## Target device
 
@@ -24,6 +24,7 @@
 | TERM after WEB | Passed; original live TUI remains available |
 | STOP | Passed; `[EXIT] session finished (code 0)` |
 | Gateway after STOP | No `gateway.run` process remained |
+| WEB Chat PTY | Passed: chat input accepted, `ping` answered `ready | step 3.7 flash:free xhigh | 6 sessions`; `webaux.log` shows no reconnect traceback |
 
 ## Web dashboard fix
 
@@ -32,6 +33,24 @@ external-dashboard credentials configured, `Prefs.webHost()` supplies
 `127.0.0.1`; this prevents Hermes from rejecting the old forced `0.0.0.0` bind
 because no authentication provider is registered.  A configured authenticated
 network dashboard can still deliberately select `0.0.0.0`.
+
+## Dashboard chat PTY fix
+
+Hermes' downloaded arm64 Node runtime links `libatomic.so.1`.  Debian's minimal
+Trixie image does not include it, so the dashboard chat WebSocket dropped
+immediately and the UI looped "Chat connection interrupted / Reconnecting… /
+Reconnect now".
+
+* `setup.sh` installs `libatomic1` alongside `nodejs npm`.
+* `init.sh` gained `ensure_node_atomic()` (one-shot `apt-get update &&
+  apt-get install -y --no-install-recommends libatomic1`) invoked in
+  `boot`, `web`, `boot-fast`, `web-fast`, `webaux` and `webaux-ready`.
+
+## Extra-keys bar
+
+The ≡ toggle button now hides both the header and the extra-keys panel in every
+mode (TUI and WEB), leaving a single ≡ row to bring them back — Termux-style
+two-row layout when expanded.
 
 ## 16 KiB memory-page compatibility
 

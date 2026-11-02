@@ -18,4 +18,7 @@ See `README.md` in this directory for the policy.
 | `hermes-loader-2.0.0-ng-vc104-debug.apk` | 2.0.0-ng | 104 | debug | 4.02 MiB | `6b712157027eb7a5c71139f8dc1749ba64e2809df9542a3e804db35a28886f28` | 2026-11-02 04:30 |
 | `hermes-loader-2.0.0-ng-vc105-debug.apk` | 2.0.0-ng | 105 | debug | 4.02 MiB | `639a1e3e15ff5ba2fa0f06e35d26f7f19b162e1a616fb74c6c96a7394f5816b4` | 2026-11-02 04:52 |
 | `hermes-loader-2.0.0-ng-vc106-debug.apk` | 2.0.0-ng | 106 | debug | 4.02 MiB | `f78f09885153d0ed186ab49675008e38befe9b99af9476a0588f6f3d2bb97b00` | 2026-11-02 05:16 |
+| `hermes-loader-2.0.0-ng-vc107-debug.apk` | 2.0.0-ng | 107 | debug | 4.02 MiB | `f002b63815651f45aacbdfea6029dfe93d79ba9dae768e447db9ea4d86079705` | 2026-11-02 05:25 |
+| `hermes-loader-2.0.0-ng-vc108-debug.apk` | 2.0.0-ng | 108 | debug | 4.02 MiB | `4e61bc89181f00d9a24d267b5a12e312b296b3635e82d6613d8db2d7784ff84a` | 2026-11-02 05:28 |
+| `hermes-loader-2.0.0-ng-vc109-debug.apk` | 2.0.0-ng | 109 | debug | 4.02 MiB | `f2a625a39d1ea298597b0f27160e7141bf80bb4f3477127782e329714764fe89` | 2026-11-02 06:14 |
 
