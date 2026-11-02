@@ -14,6 +14,8 @@ loader, the container and userland are new.
 * `chroot-ng` ships as `jniLibs/arm64-v8a/libchrootng.so` (2.5 MB, static,
   aarch64-linux-android21) so Android extracts it to `nativeLibraryDir`, the
   only directory an app targeting API 29+ may execute from.
+* The native binary's `PT_LOAD` segments use 16 KiB alignment (`0x4000`),
+  matching Android devices that use 16 KiB memory pages.
 * Command line: `--fake-id=0:0 --link2symlink --shared-proc -w /home/hermes`,
   `-b` for every persistent path, `/sys` bound, `/proc` and `/dev` left to
   chroot-ng's own synthesized views.
@@ -39,6 +41,9 @@ loader, the container and userland are new.
 * Settings → *chroot-ng compatibility mode* maps to `-R` (ahead-of-time `svc`
   rewriting) instead of `PROOT_NO_SECCOMP`.
 * Banner reads “Debian Trixie (chroot-ng)”.
+* WEB and the auxiliary dashboard honor the configured loopback host. They no
+  longer force a `0.0.0.0` bind, which Hermes correctly rejects without a
+  configured dashboard authentication provider.
 
 ### Carried over from 1.7.13-fast
 

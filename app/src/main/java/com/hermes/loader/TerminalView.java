@@ -123,10 +123,34 @@ public class TerminalView extends ScrollView {
             scrollScheduled = true;
             post(() -> {
                 scrollScheduled = false;
-                if (follow) {
-                    fullScroll(View.FOCUS_DOWN);
-                }
+                if (!follow) return;
+                scrollToCursor();
             });
+        }
+    }
+
+    /**
+     * Keeps the terminal's own cursor visible.
+     *
+     * <p>Full-screen guest programs (the Hermes TUI) paint with absolute cursor
+     * addressing and leave the rows below their frame blank. Scrolling to the
+     * end of the buffer therefore parks the viewport in that blank area; the
+     * cursor is where the program is actually drawing, so follow it instead.
+     */
+    private void scrollToCursor() {
+        android.text.Layout layout = text.getLayout();
+        if (layout == null) {
+            fullScroll(View.FOCUS_DOWN);
+            return;
+        }
+        int offset = Math.min(screen.cursorOffset(), text.length());
+        int line = layout.getLineForOffset(offset);
+        int top = layout.getLineTop(line);
+        int bottom = layout.getLineBottom(line);
+        int viewport = getHeight();
+        int y = getScrollY();
+        if (bottom > y + viewport || top < y) {
+            scrollTo(0, Math.max(0, bottom - viewport + dp(6)));
         }
     }
 

@@ -12,7 +12,10 @@ See `README.md` in this directory for the policy.
 
 | APK | Version | versionCode | Variant | Size | SHA-256 | Built |
 |---|---|---|---|---|---|---|
-| `hermes-loader-2.0.0-ng-vc100-debug-b2.apk` | 2.0.0-ng | 100 | debug | 4.02 MiB | `851df65787d85b67fae0988d3affe5a42e3bec77472cd54438d3630b65e4be06` | 2026-11-02 03:41 |
-| `hermes-loader-2.0.0-ng-vc100-debug-b3.apk` | 2.0.0-ng | 100 | debug | 4.02 MiB | `6f4ba2b85a95463875ecf5bb4c9b1a101a1cf72d98b2a42e0ba231f336671620` | 2026-11-02 03:43 |
-| `hermes-loader-2.0.0-ng-vc100-debug.apk` | 2.0.0-ng | 100 | debug | 4.02 MiB | `32917e97a8bf766d73192e3478f6a594456f186d01ea3ee2b068feff5a9a26cd` | 2026-11-02 03:40 |
+| `hermes-loader-2.0.0-ng-vc101-debug.apk` | 2.0.0-ng | 101 | debug | 4.02 MiB | `941ae46674adf3072777439ae93f3d4e635dd5668b7e60583a9041b661046193` | 2026-11-02 04:15 |
+| `hermes-loader-2.0.0-ng-vc102-debug.apk` | 2.0.0-ng | 102 | debug | 4.02 MiB | `5c5a277c243af7b16d8f2c970186cd7c188bf4e471c037ee816c5bc86efb7d8e` | 2026-11-02 04:18 |
+| `hermes-loader-2.0.0-ng-vc103-debug.apk` | 2.0.0-ng | 103 | debug | 4.02 MiB | `5bbe558aeb479f6559b88c89d34aa393ca165f9f8f4689ff441aa2b07693ad53` | 2026-11-02 04:21 |
+| `hermes-loader-2.0.0-ng-vc104-debug.apk` | 2.0.0-ng | 104 | debug | 4.02 MiB | `6b712157027eb7a5c71139f8dc1749ba64e2809df9542a3e804db35a28886f28` | 2026-11-02 04:30 |
+| `hermes-loader-2.0.0-ng-vc105-debug.apk` | 2.0.0-ng | 105 | debug | 4.02 MiB | `639a1e3e15ff5ba2fa0f06e35d26f7f19b162e1a616fb74c6c96a7394f5816b4` | 2026-11-02 04:52 |
+| `hermes-loader-2.0.0-ng-vc106-debug.apk` | 2.0.0-ng | 106 | debug | 4.02 MiB | `f78f09885153d0ed186ab49675008e38befe9b99af9476a0588f6f3d2bb97b00` | 2026-11-02 05:16 |
 

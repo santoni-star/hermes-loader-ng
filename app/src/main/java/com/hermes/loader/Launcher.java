@@ -248,7 +248,7 @@ public final class Launcher {
                                      boolean pty, Ui ui) throws Exception {
         GuestCommand.Spec spec = GuestCommand.build(
                 env, prefs, mode, pty, prefs.columns(), prefs.rows());
-        Session.get().start(mode, pty, spec.argv, spec.env, env.files);
+        Session.get().start(mode, spec.pty, spec.argv, spec.env, env.files);
     }
 
     private static String describe(Throwable e) {

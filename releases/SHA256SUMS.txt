@@ -1,4 +1,7 @@
 # SHA-256 of every archived APK (sha256sum -c compatible)
-851df65787d85b67fae0988d3affe5a42e3bec77472cd54438d3630b65e4be06  hermes-loader-2.0.0-ng-vc100-debug-b2.apk
-6f4ba2b85a95463875ecf5bb4c9b1a101a1cf72d98b2a42e0ba231f336671620  hermes-loader-2.0.0-ng-vc100-debug-b3.apk
-32917e97a8bf766d73192e3478f6a594456f186d01ea3ee2b068feff5a9a26cd  hermes-loader-2.0.0-ng-vc100-debug.apk
+941ae46674adf3072777439ae93f3d4e635dd5668b7e60583a9041b661046193  hermes-loader-2.0.0-ng-vc101-debug.apk
+5c5a277c243af7b16d8f2c970186cd7c188bf4e471c037ee816c5bc86efb7d8e  hermes-loader-2.0.0-ng-vc102-debug.apk
+5bbe558aeb479f6559b88c89d34aa393ca165f9f8f4689ff441aa2b07693ad53  hermes-loader-2.0.0-ng-vc103-debug.apk
+6b712157027eb7a5c71139f8dc1749ba64e2809df9542a3e804db35a28886f28  hermes-loader-2.0.0-ng-vc104-debug.apk
+639a1e3e15ff5ba2fa0f06e35d26f7f19b162e1a616fb74c6c96a7394f5816b4  hermes-loader-2.0.0-ng-vc105-debug.apk
+f78f09885153d0ed186ab49675008e38befe9b99af9476a0588f6f3d2bb97b00  hermes-loader-2.0.0-ng-vc106-debug.apk

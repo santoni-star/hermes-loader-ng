@@ -1122,7 +1122,7 @@ public class MainActivity extends Activity
     /**
      * Starts `hermes dashboard` next to the running console session and waits
      * for it to answer. The guest is started off the UI thread because it
-     * builds a command line, reads the SPA and spawns PRoot.
+     * builds a command line, reads the SPA and spawns chroot-ng.
      */
     private void startAuxDashboard() {
         beginDashboardTiming();
@@ -1539,7 +1539,7 @@ public class MainActivity extends Activity
 
     /**
      * Waits until the guest answers on loopback. Starting the dashboard means
-     * importing FastAPI and a few hundred routes inside PRoot, so this is
+     * importing FastAPI and a few hundred routes inside chroot-ng, so this is
      * intentionally generous; the log stays visible in the terminal pane.
      */
     private void waitForDashboard() {

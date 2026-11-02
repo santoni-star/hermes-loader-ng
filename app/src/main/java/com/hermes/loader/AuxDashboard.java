@@ -24,7 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  *
  * <p>Hermes has one gateway daemon and any number of clients: the TUI and the
  * dashboard are both clients of it, and the dashboard does not need the console
- * to stop. Switching to WEB therefore starts a second, independent PRoot
+ * to stop. Switching to WEB therefore starts a second, independent chroot-ng
  * instance ({@link GuestCommand#MODE_WEB_AUX}) instead of ending the session:
  * the agent keeps its state, the gateway keeps running, and TERM brings the
  * console back exactly where it was.

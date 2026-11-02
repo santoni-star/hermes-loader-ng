@@ -72,6 +72,16 @@ public final class BundleInstaller {
             log.line("[BUNDLE] No rootfs layer in this bundle.");
             return false;
         }
+        // Never download a userland this build cannot run. The published bundle
+        // is still Bookworm (no "debian" field), so it is skipped before the
+        // 91 MB archive is fetched and the Trixie installer takes over.
+        if (layer.debian != Env.ROOTFS_DEBIAN_MAJOR) {
+            log.line("\u001b[1;33m[BUNDLE]\u001b[0m Rootfs layer targets Debian "
+                    + (layer.debian == 0 ? "unknown" : layer.debian)
+                    + ", this build needs Debian " + Env.ROOTFS_DEBIAN_MAJOR
+                    + " - using the normal installer.");
+            return false;
+        }
 
         File staging = new File(env.files, "rootfs.new");
         deleteQuietly(staging);

@@ -63,10 +63,18 @@ public final class GuestCommand {
     public static final class Spec {
         public final List<String> argv;
         public final Map<String, String> env;
+        /**
+         * True when the guest really gets a PTY ({@code script(1)} is in the
+         * argv). The session needs this to choose between {@code \r} and
+         * {@code \n} when the user presses Enter: a pipe has no tty to
+         * translate CR into NL.
+         */
+        public final boolean pty;
 
-        Spec(List<String> argv, Map<String, String> env) {
+        Spec(List<String> argv, Map<String, String> env, boolean pty) {
             this.argv = argv;
             this.env = env;
+            this.pty = pty;
         }
     }
 
@@ -187,14 +195,14 @@ public final class GuestCommand {
         a.add("PYTHONDONTWRITEBYTECODE=1");
 
         String guest = "/bin/bash /opt/loader/init.sh " + mode;
-        // Fast modes: no PTY, no script wrapper, direct init.sh entrypoint.
-        // They skip banner, ensure_storage, prepare_guest for faster startup.
-        boolean isFastMode = MODE_BOOT_FAST.equals(mode) || MODE_WEB_FAST.equals(mode);
-        if (isFastMode) {
-            a.add("/bin/bash");
-            a.add("/opt/loader/init.sh");
-            a.add(mode);
-        } else if (pty && scriptAvailable(env)) {
+        // `script(1)` gives the guest a real PTY, which the TUI needs: without
+        // one, prompt_toolkit reads fd 0 as a pipe, prints "Input is not a
+        // terminal" and Enter never submits. Fast modes used to skip the
+        // wrapper for speed, but the wrapper is what makes the console
+        // interactive, so it is used for every mode when the caller asked for
+        // a PTY. boot-fast/web-fast still skip the slow init.sh stages.
+        boolean useScript = pty && scriptAvailable(env);
+        if (useScript) {
             a.add("/usr/bin/script");
             a.add("-q");
             a.add("-f");
@@ -219,7 +227,7 @@ public final class GuestCommand {
             String v = System.getenv(key);
             if (v != null) envp.put(key, v);
         }
-        return new Spec(a, envp);
+        return new Spec(a, envp, useScript);
     }
 
     /** {@code script(1)} gives the guest a real PTY; it arrives with util-linux. */

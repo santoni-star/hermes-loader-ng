@@ -26,6 +26,9 @@ case "$MODE" in
     boot-fast|web-fast)
         # Minimal init: just stop stale dashboard, then delegate to run.sh.
         # Pass no argument so run.sh defaults to "run" (not "boot"/"web").
+        # The PTY that `script(1)` allocates starts at 0x0 because its own
+        # stdin is a pipe; without this the TUI renders an empty screen.
+        stty_size
         stop_stale_dashboard
         exec /opt/loader/run.sh
         ;;

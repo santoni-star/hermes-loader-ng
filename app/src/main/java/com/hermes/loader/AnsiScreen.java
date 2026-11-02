@@ -212,6 +212,11 @@ final class AnsiScreen {
         }
     }
 
+    /** Absolute offset of the cursor; the view scrolls here instead of the end. */
+    int cursorOffset() {
+        return Math.max(0, Math.min(cursor, buf.length()));
+    }
+
     // ------------------------------------------------------------ line/column
 
     private int lineStart(int pos) {

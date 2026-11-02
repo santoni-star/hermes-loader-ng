@@ -42,6 +42,14 @@ public final class Env {
     public static final String ROOTFS_MARKER = ".hermes-rootfs-trixie";
     public static final String AGENT_MARKER = ".hermes-agent";
 
+    /**
+     * Debian release the loader requires in the rootfs. The marker alone is not
+     * enough: a prebuilt bundle can ship an older tree and still get the marker
+     * that {@link com.hermes.loader.bootstrap.RootfsInstaller#activate} writes,
+     * so the distro is also read from {@code /etc/debian_version}.
+     */
+    public static final int ROOTFS_DEBIAN_MAJOR = 13;
+
     private static volatile Env instance;
 
     public final File files;
@@ -119,7 +127,7 @@ public final class Env {
         instance = null;
     }
 
-    /** Creates every directory that must exist before PRoot starts. */
+    /** Creates every directory that must exist before chroot-ng starts. */
     public void ensure() throws IOException {
         File[] dirs = {
                 storage, rootfs, bin, libexec, cache, tmp, scripts,
@@ -147,7 +155,43 @@ public final class Env {
 
     public boolean rootfsInstalled() {
         return new File(rootfs, "bin/bash").isFile()
-                && new File(rootfs, ROOTFS_MARKER).isFile();
+                && new File(rootfs, ROOTFS_MARKER).isFile()
+                && isRequiredDistro(rootfs);
+    }
+
+    /**
+     * True when {@code root} holds the Debian release this build targets.
+     *
+     * <p>{@code /etc/debian_version} is the authoritative answer; a missing or
+     * unparsable file counts as a mismatch so an incomplete tree is replaced
+     * rather than trusted.
+     */
+    public static boolean isRequiredDistro(File root) {
+        return debianMajor(root) == ROOTFS_DEBIAN_MAJOR;
+    }
+
+    /** Major version from {@code etc/debian_version}, or -1 when unreadable. */
+    public static int debianMajor(File root) {
+        File version = new File(new File(root, "etc"), "debian_version");
+        if (!version.isFile()) {
+            return -1;
+        }
+        try (java.io.BufferedReader in = new java.io.BufferedReader(
+                new java.io.InputStreamReader(new java.io.FileInputStream(version),
+                        java.nio.charset.StandardCharsets.US_ASCII))) {
+            String line = in.readLine();
+            if (line == null) {
+                return -1;
+            }
+            line = line.trim();
+            int end = 0;
+            while (end < line.length() && Character.isDigit(line.charAt(end))) {
+                end++;
+            }
+            return end == 0 ? -1 : Integer.parseInt(line.substring(0, end));
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
     public boolean agentInstalled() {

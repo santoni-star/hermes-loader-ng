@@ -109,6 +109,14 @@ public final class RootfsInstaller {
      * rename fails with ENOTEMPTY.
      */
     static void activate(Env env, File staging, String label, Log log) throws IOException {
+        // Refuse to activate the wrong userland: the marker names the distro, so
+        // writing it over an older tree would make the next start trust it.
+        int major = Env.debianMajor(staging);
+        if (major != Env.ROOTFS_DEBIAN_MAJOR) {
+            throw new IOException("Expected Debian " + Env.ROOTFS_DEBIAN_MAJOR
+                    + ", the extracted tree is Debian " + (major < 0 ? "unknown" : major)
+                    + " (" + label + "). Check the rootfs source in Settings.");
+        }
         log.line("[FS] Activating new rootfs…");
         File retired = new File(env.files, "rootfs.old");
         deleteRecursive(retired);

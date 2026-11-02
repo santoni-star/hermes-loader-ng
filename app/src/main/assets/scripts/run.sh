@@ -180,14 +180,10 @@ case "$ACTION" in
     web)
         # The SPA is pre-built and bind-mounted by the app (HERMES_WEB_DIST),
         # so --skip-build keeps npm/Node out of the phone entirely.
-        # For WebView modes (MODE_WEB_FAST, MODE_WEB_AUX), bind to 0.0.0.0 so the
-        # WebView (running in host Android process) can reach the dashboard.
-        # For standalone MODE_WEB, respect the "Reachable from other devices" setting.
-        if [ "${LOADER_AUX:-0}" = "1" ] || [ "${LOADER_MODE:-}" = "web-fast" ]; then
-            host="0.0.0.0"
-        else
-            host="${LOADER_WEB_HOST:-127.0.0.1}"
-        fi
+        # The app provides LOADER_WEB_HOST (via Prefs.webHost()) which is 0.0.0.0
+        # only when "Reachable from other devices" is enabled AND auth credentials
+        # are configured. This avoids the dashboard refusing to start without auth.
+        host="${LOADER_WEB_HOST:-127.0.0.1}"
         # Credentials for a bind that is not loopback-only arrive as a sourced
         # file: the password then never shows up in PRoot's argv (or in `ps`).
         # The app owns that file and rewrites it on every start.

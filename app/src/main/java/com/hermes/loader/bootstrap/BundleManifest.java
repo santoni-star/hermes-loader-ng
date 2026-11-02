@@ -19,13 +19,18 @@ import java.util.List;
  *   "layers": [
  *     {"id": "rootfs", "target": "rootfs", "abi": "arm64-v8a",
  *      "url": "https://…/rootfs-arm64-v8a.tar.xz", "sha256": "…",
- *      "bytes": 240000000, "unpacked": 900000000, "compression": "xz"},
+ *      "bytes": 240000000, "unpacked": 900000000, "compression": "xz",
+ *      "debian": 13},
  *     {"id": "agent",  "target": "agent",  "abi": "arm64-v8a",
  *      "url": "https://…/agent-arm64-v8a.tar.xz", "sha256": "…",
  *      "bytes": 260000000, "unpacked": 900000000}
  *   ]
  * }
  * </pre>
+ *
+ * <p>A {@code rootfs} layer should declare its Debian release in {@code debian};
+ * the loader refuses a release it was not built for instead of downloading it
+ * first. Layers without the field are treated as unknown and skipped.
  *
  * <p>Layers are optional: a bundle with only {@code rootfs} installs the base
  * system and lets the normal setup finish the agent on the phone. Layers whose
@@ -46,9 +51,11 @@ public final class BundleManifest {
         public final long unpacked;
         /** true for .tar.gz, false for .tar.xz */
         public final boolean gzip;
+        /** Debian major version of a rootfs layer, or 0 when not declared. */
+        public final int debian;
 
         Layer(String id, String target, String url, String sha256, long bytes,
-              long unpacked, boolean gzip) {
+              long unpacked, boolean gzip, int debian) {
             this.id = id;
             this.target = target;
             this.url = url;
@@ -56,6 +63,7 @@ public final class BundleManifest {
             this.bytes = bytes;
             this.unpacked = unpacked;
             this.gzip = gzip;
+            this.debian = debian;
         }
 
         /** Human-readable size for the log, e.g. {@code 240.3 MB}. */
@@ -122,7 +130,8 @@ public final class BundleManifest {
                     o.optString("sha256", ""),
                     o.optLong("bytes", 0L),
                     o.optLong("unpacked", 0L),
-                    gzip));
+                    gzip,
+                    o.optInt("debian", 0)));
         }
 
         if (kept.isEmpty()) {
