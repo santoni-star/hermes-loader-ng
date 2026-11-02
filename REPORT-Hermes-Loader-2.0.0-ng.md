@@ -1,8 +1,8 @@
 # Hermes Loader 2.0.0-ng — validation report
 
-**Build:** version code 109 (`2.0.0-ng`)  
-**APK:** `releases/hermes-loader-2.0.0-ng-vc109-debug.apk`  
-**SHA-256:** `f2a625a39d1ea298597b0f27160e7141bf80bb4f3477127782e329714764fe89`
+**Build:** version code 110 (`2.0.0-ng`)  
+**APK:** `releases/hermes-loader-2.0.0-ng-vc110-debug.apk`  
+**SHA-256:** `428bfbb045ae5e80f6d99c182d53057f0b313e1c885ef27caf108312c0e2549b`
 
 ## Target device
 
@@ -51,6 +51,12 @@ Reconnect now".
 The ≡ toggle button now hides both the header and the extra-keys panel in every
 mode (TUI and WEB), leaving a single ≡ row to bring them back — Termux-style
 two-row layout when expanded.
+
+## Dashboard log Clear button
+
+The LOG dialog gains a CLEAR LOG button (bottom left, next to CLOSE) that
+truncates `webaux.log` and refreshes the view. Copy and Close keep their
+existing behaviour.
 
 ## 16 KiB memory-page compatibility
 
